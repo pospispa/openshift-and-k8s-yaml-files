@@ -1,0 +1,12 @@
+# Claim a PV 
+# Have the PV recycled after PVC is deleted
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

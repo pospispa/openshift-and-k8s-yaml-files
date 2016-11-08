@@ -1,0 +1,20 @@
+# --pv-recycler-pod-template-filepath-hostpath parameter
+# sunny day scenarion test: a volume exists
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pv-recycler-
+  namespace: default
+spec:
+  restartPolicy: Never
+  volumes:
+  - name: vol
+    hostPath:
+      path: /tmp/host_path
+  containers:
+  - name: pv-recycler
+    image: "gcr.io/google_containers/busybox"
+    command: ["/bin/sh", "-c", "test -e /scrub && rm -rf /scrub/..?* /scrub/.[!.]* /scrub/*  && test -z \"$(ls -A /scrub)\" || exit 1"]
+    volumeMounts:
+    - name: vol
+      mountPath: /scrub

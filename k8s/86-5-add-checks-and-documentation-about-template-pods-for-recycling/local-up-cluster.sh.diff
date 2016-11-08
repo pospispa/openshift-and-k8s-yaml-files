@@ -1,0 +1,22 @@
+diff --git a/hack/local-up-cluster.sh b/hack/local-up-cluster.sh
+index 78c1701..c172057 100755
+--- a/hack/local-up-cluster.sh
++++ b/hack/local-up-cluster.sh
+@@ -150,7 +150,7 @@ KUBELET_HOST=${KUBELET_HOST:-"127.0.0.1"}
+ # By default only allow CORS for requests on localhost
+ API_CORS_ALLOWED_ORIGINS=${API_CORS_ALLOWED_ORIGINS:-/127.0.0.1(:[0-9]+)?$,/localhost(:[0-9]+)?$}
+ KUBELET_PORT=${KUBELET_PORT:-10250}
+-LOG_LEVEL=${LOG_LEVEL:-3}
++LOG_LEVEL=5
+ CONTAINER_RUNTIME=${CONTAINER_RUNTIME:-"docker"}
+ CONTAINER_RUNTIME_ENDPOINT=${CONTAINER_RUNTIME_ENDPOINT:-""}
+ IMAGE_SERVICE_ENDPOINT=${IMAGE_SERVICE_ENDPOINT:-""}
+@@ -403,6 +403,7 @@ function start_controller_manager {
+       --feature-gates="${FEATURE_GATES}" \
+       --cloud-provider="${CLOUD_PROVIDER}" \
+       --cloud-config="${CLOUD_CONFIG}" \
++      --pv-recycler-pod-template-filepath-hostpath="/home/ppospisi/src/k8s.io/kubernetes/hack/pod-volume.yaml" \
+       --kubeconfig "$CERT_DIR"/kubeconfig \
+       --master="https://${API_HOST}:${API_SECURE_PORT}" >"${CTLRMGR_LOG}" 2>&1 &
+     CTLRMGR_PID=$!
+
