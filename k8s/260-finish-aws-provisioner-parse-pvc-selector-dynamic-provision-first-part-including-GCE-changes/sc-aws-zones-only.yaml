@@ -1,0 +1,13 @@
+# Storage Class that does not contain both zone and zones parameters => error
+kind: StorageClass
+apiVersion: storage.k8s.io/v1beta1
+metadata:
+  name: slzones
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: io1
+  iopsPerGB: "10"
+  encrypted: "true"
+  kmsKeyId: keyvalue
+  zones: us-east-1c, us-east-1d
+

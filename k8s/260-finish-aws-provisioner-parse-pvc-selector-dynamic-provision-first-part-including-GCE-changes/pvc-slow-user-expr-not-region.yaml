@@ -1,0 +1,20 @@
+# PVC that does not have any zones/regions configured
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: slexur1notin
+  annotations:
+    "volume.beta.kubernetes.io/storage-class": "slow"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3.7Gi
+  selector:
+    matchExpressions:
+        - key: failure-domain.beta.kubernetes.io/region
+          operator: NotIn
+          values:
+            - us-central1
+

@@ -1,0 +1,14 @@
+# PVC that does not have any zones/regions configured
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sccblah
+  annotations:
+    "volume.beta.kubernetes.io/storage-class": "scblah"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3.7Gi
+

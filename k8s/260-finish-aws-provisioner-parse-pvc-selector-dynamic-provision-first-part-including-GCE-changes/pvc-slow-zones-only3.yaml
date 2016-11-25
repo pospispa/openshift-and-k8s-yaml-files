@@ -1,0 +1,14 @@
+# PVC that does not have any zones/regions configured
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: slczones3
+  annotations:
+    "volume.beta.kubernetes.io/storage-class": "slzones"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3.7Gi
+
