@@ -1,0 +1,21 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: app1
+spec:
+  containers:
+  - name: test-pod
+    image: gcr.io/google_containers/busybox:1.24
+    command:
+      - "/bin/sh"
+    args:
+      - "-c"
+      - "date > /mnt/app1.txt; sleep 60 && exit 0 || exit 1"
+    volumeMounts:
+      - name: path-pvc
+        mountPath: "/mnt"
+  restartPolicy: "Never"
+  volumes:
+    - name: path-pvc
+      persistentVolumeClaim:
+        claimName: slzc
